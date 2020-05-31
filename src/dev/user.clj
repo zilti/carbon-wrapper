@@ -70,7 +70,7 @@
       (let [displayName  (guess-display-name file displayName)
             class        displayName
             factory-name (str "ui-" (hyphenated class))
-            filename     (str "src/main/ch/lyrion/carbon/" (hyphenated subdir) "/" (str/replace factory-name #"-" "_") ".cljs")
+            filename     (str "src/main/ch/lyrion/carbon/" (str/replace (hyphenated subdir) #"-" "_") "/" (str/replace factory-name #"-" "_") ".cljs")
             nns          (str "ch.lyrion.carbon." (hyphenated subdir) "." factory-name)
             include-file (str "carbon-components-react/lib/components/" subdir "/" file)
             docstring    (gen-docstring docs)]

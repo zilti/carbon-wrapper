@@ -9,4 +9,9 @@
                                     org.clojure/data.json     {:mvn/version "1.0.0"}
                                     com.fulcrologic/fulcro    {:mvn/version "3.2.9" :scope "provided"}
                                     thheller/shadow-cljs      {:mvn/version "2.9.10"}
-                                    nubank/workspaces         {:mvn/version "1.0.15"}}}}}
+                                    nubank/workspaces         {:mvn/version "1.0.15"}}}
+           :jar      {:extra-deps {seancorfield/depstar {:mvn/version "1.0.94"}}
+                      :main-opts  ["-m" "hf.depstar.jar" "target/carbon-wrapper.jar"]}
+           :deploy   {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+                      :main-opts  ["-m" "deps-deploy.deps-deploy" "deploy"
+                                   "target/carbon-wrapper.jar"]}}}
