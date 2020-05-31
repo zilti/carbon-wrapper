@@ -1,0 +1,28 @@
+{
+  "name": "fulcro3-carbon-wrappers",
+  "version": "1.0.0",
+  "description": "Carbon Design System Wrapper",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitea.lyrion.ch/zilti/carbon-wrapper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitea.lyrion.ch/zilti/carbon-wrapper/issues"
+  },
+  "homepage": "https://gitea.lyrion.ch/zilti/carbon-wrapper",
+  "devDependencies": {
+    "carbon-components": "^10.12.0",
+    "carbon-components-react": "^7.12.0",
+    "carbon-icons": "^7.0.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "shadow-cljs": "^2.9.10",
+    "highlight.js": "9.12.0",
+    "react-grid-layout": "0.16.6",
+    "react-icons": "2.2.7",
+    "reakit": "0.11.1"
+  }
+}

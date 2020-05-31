@@ -1,0 +1,134 @@
+:toc:
+:toc-placement: preamble
+:toc-levels: 2
+
+= Fulcro 3 Carbon Wrappers
+
+Fulcro 3 convenience wrappers for using https://react.carbondesignsystem.com[Carbon Design System] components.
+
+This library offers improved integration with the carbon design system packages with predefined
+factories and doc strings generated directly from the Carbon source. It also includes symbols for
+all icon names.
+
+NOTE: This library requires that you use Fulcro 3 and Shadow CLJS as the compiler.
+
+image::https://img.shields.io/clojars/v/ch.lyrion/carbon-wrapper.svg[link="https://clojars.org/ch.lyrion/carbon-wrapper"]
+
+== Usage
+
+Shadow-cljs has much better integration with the NPM ecosystem, which allows you to
+easily upgrade your carbon dependency without worrying about cljsjs, and also
+allows you to easily use individual components for a smaller build size. Simply add
+the carbon components to your `package.json`:
+
+```
+$ npm install --save-dev carbon-components-react carbon-components carbon-icons
+```
+
+=== Using Components
+
+Individual factories can be found in namespaces that mirror the carbon-react module structure:
+
+e.g. `Grid > Row` is available as
+```
+(:require [ch.lyrion.carbon.grid.ui-row :refer [ui-row]])
+```
+
+and `Accordion > Accordion` is available as
+```
+(:require [ch.lyrion.carbon.accordion.ui-accordion :refer [ui-accordion]])
+```
+
+While this is a bit tedious in the requires, it ensures that you don't get components in your
+build that you don't use.
+
+== Porting from Carbon React Documentation Examples
+
+Props are required. The factories will convert them to js for you, but if you want every ounce of
+possible speed you can pre-tag your props with `#js`.
+
+React Version:
+```
+<Breadcrumb
+  className="some-class"
+  noTrailingSlash
+  onClick={function noRefCheck(){}}
+>
+  <BreadcrumbItem>
+    <a href="/#">
+      Breadcrumb 1
+    </a>
+  </BreadcrumbItem>
+  <BreadcrumbItem href="#">
+    Breadcrumb 2
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    aria-current="page"
+    href="#"
+  >
+    Breadcrumb 3
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+This library:
+
+```
+(ui-breadcrumb
+{:className "some-class"
+ :noTrailingSlash true
+ :onClick (fn [] nil)
+ :children [
+     (ui-breadcrumb-item
+      (dom/a {:href "/#"} "Breadcrumb 1"))
+     (ui-breadcrumb-item
+      "Breadcrumb 2")
+     (ui-breadcrumb-item
+      {:aria-current "page"
+       :href "#"}
+      "Breadcrumb 3")
+ ]})
+```
+
+
+== Examples
+
+You can see some example usage in the workspaces of this repository. To play with them live
+clone this repo, and start the compiler:
+
+```
+cd carbon-wrapper
+npm install
+npx shadow-cljs server
+```
+Navigate to http://localhost:9000 and start the workspaces build
+
+Then navigate to http://localhost:8023
+
+== Regenerating Factories
+
+The factory files are generated from a checkout of the (https://github.com/carbon-design-system/carbon)[Carbon]
+source (to automatically get the docstrings). The `user` namespace can be run in a normal Clojure REPL, and
+contains the function to generate the files.
+
+First clone the semantic-ui-react repo:
+```
+git clone https://github.com/carbon-design-system/carbon
+```
+
+In the cloned repository, run:
+```
+yarn install
+yarn build
+```
+
+Then using the path to the generated packages/react/build/docgen/components folder, start a repl and run
+```
+(gen-factories "path/to/generated/docgen/components")
+```
+
+== LICENSE
+
+Copyright 2020 Daniel Ziltener
+
+MIT Public License
